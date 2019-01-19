@@ -265,13 +265,13 @@
 
 " Themes, Commands, etc  ----------------------------------------------------{{{
   syntax on
-  "let g:oceanic_next_terminal_bold = 1
-  "let g:oceanic_next_terminal_italic = 1
-  " let g:oceanic_next_highlight_current_line =1
+  let g:oceanic_next_terminal_bold = 1
+  let g:oceanic_next_terminal_italic = 1
+  let g:oceanic_next_highlight_current_line =1
   " set cursorline
-  "colorscheme OceanicNext
+  colorscheme OceanicNext
   " colorscheme one
-  " set background=dark
+  set background=dark
 "}}}
 
 " Code formatting -----------------------------------------------------------{{{
