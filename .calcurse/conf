@@ -23,3 +23,5 @@ general.systemdialogs=no
 notification.command=printf '\a'
 notification.notifyall=flagged-only
 notification.warning=300
+appearance.headingpos=right-justified
+format.dayheading=%B %-d, %Y
