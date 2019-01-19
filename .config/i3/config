@@ -20,8 +20,8 @@
 # #---Basic Definitions---# #
 # Needed for i3-gaps
 for_window [class="^.*"] border pixel 2
-gaps inner 15
-gaps outer 15
+gaps inner 0
+gaps outer 0
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 set $stoprec --no-startup-id dmenurecord kill
@@ -43,6 +43,7 @@ for_window [instance="dropdown_tmuxdd"] border pixel 3
 for_window [instance="dropdown_dropdowncalc"] border pixel 2
 for_window [instance="dropdown_*"] move position center
 
+
 # #---Starting External Scripts---# #
 # Setting the background:
 exec --no-startup-id setbg
@@ -60,6 +61,8 @@ exec_always --no-startup-id mpdupdate
 exec --no-startup-id mpd
 # Podboat automatic queue and download
 exec_always --no-startup-id podentr
+# sync PRIMARY and CLIPBOARD selections
+exec_always --no-startup-id clipboard.sh
 
 # Set Xresources colors:
 set_from_resource $darkblack	color0  #000000
@@ -88,7 +91,7 @@ client.urgent		$darkred	$darkred	$black		$darkred		$darkred
 client.background $black
 
 bar {
-	font pango:mono 10
+	font pango:mono 12
 	colors {
 			background $darkblack
 			statusline $darkwhite
@@ -137,7 +140,8 @@ bindsym $mod+Shift+w		exec --no-startup-id $BROWSER
 bindsym $mod+e			exec $term -e neomutt && pkill -RTMIN+12 i3blocks
 bindsym $mod+Shift+e		exec --no-startup-id tutorialvids
 
-bindsym $mod+r 			exec $term -e $FILE
+# bindsym $mod+r 			exec $term -e $FILE
+bindsym $mod+r			restart
 bindsym $mod+Shift+r		exec --no-startup-id winresize
 
 bindsym $mod+t			split toggle
@@ -282,7 +286,6 @@ no_focus [title="mpvfloat"]
 
 # #---Function Buttons---# #
 bindsym $mod+F1		exec --no-startup-id groff -kejpt -mom ~/.readme.mom -Tpdf | zathura -
-bindsym $mod+F2		restart
 bindsym $mod+F3		exec --no-startup-id displayselect
 bindsym $mod+F4		exec --no-startup-id prompt "Hibernate computer?" "$hibernate"
 bindsym $mod+F5		exec --no-startup-id $netrefresh
@@ -394,11 +397,11 @@ bindsym XF86Close		kill
 bindsym XF86WebCam		exec --no-startup-id camtoggle
 bindsym XF86Mail		exec $term -e neomutt && pkill -RTMIN+12 i3blocks
 bindsym XF86Messenger		exec $term -e weechat
-bindsym XF86Search		exec $BROWSER https://duckduckgo.com
+#bindsym XF86Search		exec $BROWSER https://duckduckgo.com
 ##bindsym XF86Go			exec
 ##bindsym XF86Finance		exec
 ##bindsym XF86Game		exec
-bindsym XF86Shop		exec $BROWSER https://ebay.com
+#bindsym XF86Shop		exec $BROWSER https://ebay.com
 bindsym XF86MonBrightnessDown	exec --no-startup-id xbacklight -dec 15
 bindsym XF86MonBrightnessUp	exec --no-startup-id xbacklight -inc 15
 bindsym XF86AudioMedia		exec --no-startup-id $term -e ncmpcpp
@@ -415,3 +418,4 @@ bindsym XF86Documents		exec $term -e $FILE ~/Documents
 bindsym XF86WLAN		exec $netrefresh
 
 exec --no-startup-id lukescripts
+exec_always --no-startup-id notify-send -i ~/.scripts/pix/larbs.png '<b>Welcome to LARBS:</b> Press Super+F1 for the manual.' -t 10000
