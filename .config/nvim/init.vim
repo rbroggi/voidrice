@@ -88,6 +88,7 @@
   call dein#add('neoclide/todoapp.vim')
 
   call dein#add('tweekmonster/deoplete-clang2')
+  call dein#add('zchee/deoplete-clang')
   call dein#add('artur-shaik/vim-javacomplete2')
   call dein#add('Shougo/neco-vim')
   call dein#add('Shougo/neoinclude.vim')
@@ -124,6 +125,8 @@
   call dein#add('sjl/gundo.vim')
   call dein#add('drzel/vim-line-no-indicator')
   call dein#add('Quramy/vison')
+  " check the git repo for devicons - you will need a nerd compatible font for
+  " it to work
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('junegunn/fzf')
   if dein#check_install()
@@ -143,6 +146,7 @@
   set mouse=a
   set relativenumber
   set number
+  set encoding=utf-8
   " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
   set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
   set clipboard+=unnamedplus
@@ -525,6 +529,10 @@
   let g:deoplete#ignore_sources = {}
   let g:deoplete#ignore_sources._ = ['around']
 
+  " c++ configuration
+  let g:deoplete#sources#clang#libclang_path='/usr/lib/libclang.so'
+  let g:deoplete#sources#clang#clang_header='/usr/lib/clang/7.0.1/include/'
+
   " let g:deoplete#enable_debug = 1
   " let g:deoplete#enable_profile = 1
   " let g:deoplete#enable_logging = {'level': 'DEBUG','logfile': 'deoplete.log'}
@@ -704,13 +712,30 @@
     let g:airline_symbols = {}
   endif
 
+  " unicode symbols
+  let g:airline_left_sep = '»'
+  let g:airline_left_sep = '▶'
+  let g:airline_right_sep = '«'
+  let g:airline_right_sep = '◀'
+  let g:airline_symbols.linenr = '¶'
+  let g:airline_symbols.paste = '∥'
+  let g:airline_symbols.whitespace = 'Ξ'
+
+  " airline symbols
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
+  let g:airline_symbols.branch = ''
+  let g:airline_symbols.readonly = ''
+  let g:airline_symbols.linenr = ''
+
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#mike#enabled = 1
   set hidden
   let g:airline#extensions#tabline#fnamemod = ':t'
   let g:airline#extensions#tabline#buffer_idx_mode = 1
   let g:airline_powerline_fonts = 1
-  let g:airline_symbols.branch = ''
   let g:airline_theme='oceanicnext'
   cnoreabbrev <silent> <expr> x getcmdtype() == ":" && getcmdline() == 'x' ? 'Sayonara' : 'x'
   tmap <leader>x <c-\><c-n>:bp! <BAR> bd! #<CR>
